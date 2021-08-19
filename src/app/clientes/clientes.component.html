@@ -1,0 +1,40 @@
+<div class="card text-primary border-primary mb-3" >
+  <div class="card-header">Clientes</div>
+  <div class="card-body">
+    <h5 class="card-title">Listado de Clientes</h5>
+    <div class="my-2 textl-left" >
+    <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/clientes/form']">Crear Clientes</button>
+    </div>
+    <div *ngIf="clientes?.length == 0" class="alert alert-info">
+      No hay registros en Base de Datos!
+      </div>
+<table class='table table-bordered table-striped' *ngIf="clientes?.length>0">
+  <thead>
+<tr>
+  <th>ID</th>
+  <th>NOMBRE</th>
+  <th>APELLIDO</th>
+  <th>MAIL</th>
+  <th>FECHA</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr *ngFor='let cliente of clientes'>
+      <td>{{ cliente.id}}</td>
+      <td>{{ cliente.nombre}}</td>
+      <td>{{ cliente.apellido}}</td>
+      <td>{{ cliente.email}}</td>
+      <td>{{ cliente.createAt}}</td>
+      <td>
+        <button type="button" name="editar" [routerLink]="['/clientes/form',cliente.id]" class="btn btn-primary">editar</button>
+      </td>
+      <td>
+        <button type="button" name="eliminar" (click)='delete(cliente)' class="btn btn-danger">eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<app-paginator *ngIf="paginador" [paginador]="paginador"></app-paginator>
+  </div>
+</div>
